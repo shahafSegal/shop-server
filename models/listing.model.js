@@ -8,4 +8,4 @@ const ListingSchema=new mongoose.Schema({
 
 const Listing=mongoose.model('listing',ListingSchema)
 
-module.exports={UsersModel}
+module.exports={Listing}

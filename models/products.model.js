@@ -7,6 +7,6 @@ const productSchema=new mongoose.Schema({
     productListings:{type:Array,required:true,default:[]}
 })
 
-const productModel=mongoose.model('products',productSchema)
+const Product=mongoose.model('products',productSchema)
 
-module.exports={productModel}
+module.exports={Product}
