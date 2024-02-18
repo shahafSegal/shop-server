@@ -1,7 +1,7 @@
 const mongoose=require("mongoose")
 
 const CartSchema=new mongoose.Schema({
-    UserId:{type:mongoose.Types.ObjectId,required:true,ref:'users' ,unique:true},
+    userId:{type:mongoose.Types.ObjectId,required:true,ref:'users' ,unique:true},
     savedPurchase:[
         {
             listingID:{type:mongoose.Types.ObjectId,required:true,ref:'listings'}

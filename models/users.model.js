@@ -11,7 +11,7 @@ const UsersSchema=new mongoose.Schema({
     //array of objectId representing 
     savedProducts:[{type:mongoose.Types.ObjectId,required:true,ref:"products"}],
     
-    userCart:{type:mongoose.Types.ObjectId,required:true,ref:"carts"}
+    userCart:{type:mongoose.Types.ObjectId,required:false,ref:"carts"}
 })
 
 const UsersModel=mongoose.model('users',UsersSchema)
