@@ -8,10 +8,11 @@ const registerUser= async(req,res)=>{
     try{
         const knownUser=await UsersModel.findOne({email:body.email})
         if(knownUser)return res.send("email already in use")
-        if (body.password.length<7)return res.send("invalid password")
         const [salt,password]=encryptWithNewSalt(body.password)
         const user=new UsersModel({...body,salt,password,userSetting:"customer"})
-        const userCart=newCart(user._id)
+        const cart=await newCart(user._id)
+        console.log(cart)
+        user.userCart=cart._id;
         await user.save();
         const token=genTokenUser(user);
         res.status(200).send({user,token})

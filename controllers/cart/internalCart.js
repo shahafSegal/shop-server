@@ -2,7 +2,7 @@ const Cart = require("../../models/cart.model")
 
 const newCart= async (userId)=>{
     try{
-        const existingCart= Cart.findOne({userId})
+        const existingCart= await Cart.findOne({userId})
         if(existingCart){
             return existingCart;
         }
