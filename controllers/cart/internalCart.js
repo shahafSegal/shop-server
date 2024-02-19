@@ -2,6 +2,10 @@ const Cart = require("../../models/cart.model")
 
 const newCart= async (userId)=>{
     try{
+        const existingCart= Cart.findOne({userId})
+        if(existingCart){
+            return existingCart;
+        }
         const newCart= new Cart({userId})
         await newCart.save()
         return newCart
@@ -17,8 +21,7 @@ const deleteCart=async(cartId)=>{
     }catch(err){
         console.log(err)
     }
-    return null
-    
+    return null    
 }
 
 module.exports={deleteCart,newCart}
