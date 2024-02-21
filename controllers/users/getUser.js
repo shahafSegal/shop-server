@@ -1,14 +1,13 @@
 const { UsersModel } = require("../../models/users.model");
 
-const registerUser= async(req,res)=>{
-    const body=req.body;
+const getUser= async(req,res)=>{
     try{
-        const knownUser=await UsersModel.findOne({email:body.email})
+        const knownUser=await UsersModel.findById(req.userId)
+        res.status(knownUser?200:401).send({user:knownUser})
     }catch(err){
-        console.log(err)
         res.status(400).send({message:"error accured"})
     }
 
 }
 
-module.exports= {registerUser}
+module.exports= {getUser}

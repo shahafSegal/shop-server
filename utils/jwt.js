@@ -9,7 +9,7 @@ const genTokenUser=(userObj)=>{
 const genToken=(payload)=>{
     const token=jwt.sign(
         payload,jwtSecret,
-        {expiresIn:'1h'}
+        {expiresIn:'6h'}
     )
     return token
 }
