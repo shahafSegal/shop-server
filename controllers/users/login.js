@@ -13,10 +13,10 @@ const loginUser=async(req,res)=>{
                 const token=genTokenUser(knownUser)
                 return res.status(200).send({user:knownUser,token})}
         }
-        res.send("incorrect credentials")
+        res.status(401).send({message:"incorrect credentials"})
     } catch (error) {
         console.log(error)
-        res.status(400).send({message:"error accured"})
+        res.status(400).send("error accured")
     }
 }
 

@@ -34,7 +34,6 @@ const deleteListing=async (req,res)=>{
         
         existingProduct.listings=existingProduct.listings.filter((currListing)=>{return req.listingId!=currListing})
         await existingProduct.save()
-        req.listingId=newListing._id;
         res.status(200).send(existingListing)
     }  catch (error) {
         console.error(error);
