@@ -2,7 +2,7 @@ const mongoose=require("mongoose")
 
 const ListingSchema=new mongoose.Schema({
     company:{type:String,required:true},
-    price:{type:String,required:true},
+    price:{type:Number,required:true},
     link:{type:String,required:true},
     sightings:{
         type: Number,
