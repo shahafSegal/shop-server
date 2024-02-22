@@ -3,6 +3,7 @@ const mongoose=require("mongoose")
 const mongoUrl="mongodb://localhost:27017/shop-app"
 const userRouter=require('./routes/users.routes')
 const productRouter=require("./routes/products.routes")
+const listingsRouter=require('./routes/listings.routes')
 const cors=require('cors')
 
 mongoose.connect(mongoUrl)
@@ -17,7 +18,8 @@ const app=express()
 app.use(express.json())
 app.use(cors())
 
-app.use('/api/v1/users',userRouter)
-app.use('/api/v1/products',productRouter)
+app.use('/shop-s-mart/users',userRouter)
+app.use('/shop-s-mart/products',productRouter)
+app.use('/shop-s-mart/listings',listingsRouter)
 
 module.exports={app};
