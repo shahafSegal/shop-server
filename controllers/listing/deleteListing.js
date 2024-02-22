@@ -22,17 +22,17 @@ const userRemoveListing=async (req,res,next)=>{
 }
 
 const deleteListing=async (req,res)=>{
-    const body=req.body;
     const {listingId}=req.params;
     try {
       
         const existingListing= await Listing.findByIdAndDelete(listingId)
+        console.log(existingListing)
         if(!existingListing){
-            return res.status(500).send(`product ${listingId} not found`);
+            return res.status(500).send(`listing ${listingId} not found`);
         }
         const existingProduct= await Product.findById(existingListing.productID);
         
-        existingProduct.listings=existingProduct.listings.filter((currListing)=>{return req.listingId!=currListing})
+        existingProduct.listings=existingProduct.listings.filter((currListing)=>{return listingId!=currListing})
         await existingProduct.save()
         res.status(200).send(existingListing)
     }  catch (error) {
@@ -44,4 +44,4 @@ const deleteListing=async (req,res)=>{
 
 
 
-module.exports ={createListing,userAddListing}
+module.exports ={deleteListing,userRemoveListing}
