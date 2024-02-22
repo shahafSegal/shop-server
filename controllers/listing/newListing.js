@@ -1,6 +1,7 @@
 const Listing = require("../../models/listing.model");
 const Product = require("../../models/products.model");
 const { UsersModel } = require("../../models/users.model");
+const updateProductPrice = require("../Products/UpdatePrices");
 
 //gets in params productID
 //gets in body the new listing
@@ -17,7 +18,8 @@ const createListing=async (req,res,next)=>{
         const newListing= await new Listing({...body,productID}).save()
         existingProduct.listings.push(newListing._id);
         await existingProduct.save()
-        req.listingId=newListing._id;
+        updateProductPrice(existingProduct._id)
+        req.listing=newListing
         next()
     }  catch (error) {
         console.error(error);
@@ -31,9 +33,9 @@ const userAddListing=async (req,res)=>{
     const userId=req.user.id;
     try {
         const currUser= await UsersModel.findById(userId)
-        currUser.userListing.push(req.listingId)
+        currUser.userListing.push(req.listing._id)
         await currUser.save()
-        res.status(200).send("createdListing");
+        res.status(200).send({listing:req.listing});
     }  catch (error) {
         console.error(error);
         res.status(500).send({message:'Server Error'});

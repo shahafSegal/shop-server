@@ -1,6 +1,7 @@
 const Listing = require("../../models/listing.model");
 const Product = require("../../models/products.model");
 const { UsersModel } = require("../../models/users.model");
+const updateProductPrice = require("../Products/UpdatePrices");
 
 
 const userRemoveListing=async (req,res,next)=>{
@@ -34,6 +35,8 @@ const deleteListing=async (req,res)=>{
         
         existingProduct.listings=existingProduct.listings.filter((currListing)=>{return listingId!=currListing})
         await existingProduct.save()
+
+        updateProductPrice(existingProduct._id)
         res.status(200).send(existingListing)
     }  catch (error) {
         console.error(error);
