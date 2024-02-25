@@ -13,7 +13,7 @@ const updateProductPrice= async(productID)=>{
             product.listings.forEach(({ price }) => {
                 if (price > maxPrice) {
                     maxPrice = price;
-                } else if (price < minPrice) {
+                } else if (price < minPrice&&price>0) {
                     minPrice = price;
                 }
             });
