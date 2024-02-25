@@ -3,9 +3,10 @@ const Product = require("../../models/products.model")
 const searchProduct= async(req,res)=>{
     try{
         const {name,tags,tagFilter}=req.query
+        console.log(req.query)
         const queryObj={}
         if (name){
-            queryObj.name=name
+            queryObj.name={ $regex: new RegExp(name, 'i') }
         }
 
         if(tags){
