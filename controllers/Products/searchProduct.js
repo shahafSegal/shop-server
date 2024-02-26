@@ -2,7 +2,7 @@ const Product = require("../../models/products.model")
 
 const searchProduct= async(req,res)=>{
     try{
-        const {name,tags,tagFilter}=req.query
+        const {name,tags,tagFilter,price}=req.query
         console.log(req.query)
         const queryObj={}
         if (name){
@@ -22,6 +22,14 @@ const searchProduct= async(req,res)=>{
                 default:
                     queryObj.tags={$in:tagsArr}
             }
+        }
+        if(price){
+            const priceValue = parseFloat(price); // Convert string to number
+            queryObj.$and = [
+                { min_value: { $lte: priceValue } },
+                { max_value: { $gte: priceValue } }
+            ];
+                
         }
 
         const products= await Product.find(queryObj)
