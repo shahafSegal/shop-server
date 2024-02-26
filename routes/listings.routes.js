@@ -6,6 +6,7 @@ const { userRemoveListing, deleteListing } = require('../controllers/listing/del
 
 
 router.post("/new/:productID",auth,createListing,userAddListing)
+router.patch("/edit/:listingId")
 
 router.delete("/remove/:listingId",auth,userRemoveListing,deleteListing)
 
