@@ -15,6 +15,9 @@ const searchProduct= async(req,res)=>{
                 case 'all':
                     queryObj.tags={$all:tagsArr}
                     break;
+                case "fully":
+                    queryObj.tags={$all:tagsArr,$size:tagsArr.length}
+                    break;
                 case 'exclude':
                     queryObj.tags={$nin:tagsArr}
                     break;
@@ -31,6 +34,7 @@ const searchProduct= async(req,res)=>{
             ];
                 
         }
+        console.log(queryObj)
 
         const products= await Product.find(queryObj)
         res.status(200).send({products})
