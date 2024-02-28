@@ -16,7 +16,7 @@ const loginUser=async(req,res)=>{
         res.status(401).send({message:"incorrect credentials"})
     } catch (error) {
         console.log(error)
-        res.status(400).send("error accured")
+        res.status(400).send({message:"error accured"})
     }
 }
 
