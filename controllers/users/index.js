@@ -1,4 +1,5 @@
 const { UsersModel } = require("../../models/users.model");
+const { genTokenUser } = require("../../utils/jwt");
 const { encryptWithNewSalt } = require("./encryption");
 
 const changePassword=async (req,res)=>{
@@ -22,9 +23,25 @@ const deleteUser=async (req,res)=>{
         res.send({message:deletMes?'deleted succesfully':'not found'})
     }catch(err){
         console.log(err)
-        res.status(400).send("error accured")
+        res.status(400).send({message:"error accured"})
+    }
+}
+const changeUserSetting=async(req,res)=>{
+    const UserID=req.user.id;
+    const UserRole=req.user.role;
+    try{
+        if((UserRole=="customer")||(UserRole=="seller"))
+        {
+            const CurrUser= await UsersModel.findByIdAndUpdate(UserID,{userSetting:UserRole=="customer"?"seller":"customer"})
+            const token=genTokenUser(CurrUser);
+            return res.status(200).send({token,user:CurrUser})
+        }
+        res.status(400).send({message:"user setting incorrect/admin"})
+    }catch(err){
+        console.log(err)
+        res.status(400).send({message:"error accured"})
     }
 }
 
 
-module.exports={changePassword,deleteUser}
+module.exports={changePassword,deleteUser,changeUserSetting}
