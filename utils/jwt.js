@@ -3,7 +3,7 @@ const jwtSecret= '1234054'
 
 
 const genTokenUser=(userObj)=>{
-    return genToken({id:userObj._id,email:userObj.email,role:"admin"})
+    return genToken({id:userObj._id,email:userObj.email,role:userObj.userSetting})
 }
 
 const genToken=(payload)=>{
