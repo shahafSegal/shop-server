@@ -15,7 +15,7 @@ router.get('/login',auth,getUser)
 
 router.patch('/password/:id',auth,changePassword)
 
-router.get('/roleChange',auth,changeUserSetting)
+router.get('/role-change',auth,changeUserSetting)
 
 // router.delete('/remove/:id',auth,deleteUser)
 

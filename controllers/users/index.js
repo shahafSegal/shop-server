@@ -32,7 +32,7 @@ const changeUserSetting=async(req,res)=>{
     try{
         if((UserRole=="customer")||(UserRole=="seller"))
         {
-            const CurrUser= await UsersModel.findByIdAndUpdate(UserID,{userSetting:UserRole=="customer"?"seller":"customer"})
+            const CurrUser= await UsersModel.findByIdAndUpdate(UserID,{userSetting:UserRole=="customer"?"seller":"customer"},{new:true})
             const token=genTokenUser(CurrUser);
             return res.status(200).send({token,user:CurrUser})
         }
